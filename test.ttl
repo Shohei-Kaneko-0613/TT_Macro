@@ -1,0 +1,47 @@
+username = 'root'
+passwdfile = 'akiba2350'
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+fileopen hostlist 'C:\Users\nttatc\Desktop\login_macro\hostlist.txt' 0
+
+:loopstart
+filereadln hostlist buf
+ 
+;ファイルから行を読み込めなかった場合
+if result<>0 then
+	goto loopend
+else
+
+msg = buf
+	strconcat msg ':22 /ssh /auth=password /user='
+	strconcat msg username
+	strconcat msg ' /passwd='
+	strconcat msg passwdfile
+
+	connect msg
+
+	unlink
+
+	goto loopstart
+
+endif
+ 
+;ループ終了
+:loopend
+ 
+fileclose hostlist
+
+; 自動ログ記録
+logdir = 'C:\Users\nttatc\Desktop\login_macro\log\'
+
+logfile = logdir
+logopen logfile 0 0
+strconcat logfile username
+strconcat logfile '@'
+strconcat logfile buf
+getdate datetime '-%Y%m%d-%H%M%S'
+strconcat logfile datetime
+strconcat logfile '.log'
+
+
+end

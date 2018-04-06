@@ -1,0 +1,43 @@
+;;■機能説明
+;;機能①
+;;　IPアドレスはキーボードからの入力式
+;;機能②
+;;　パスワードは平文で決め打ち
+;;機能③
+;;　自動でログ収集
+;========================================
+
+username = 'root'
+passwdfile = 'akiba2350'
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ①－１、接続先ホスト情報入力 
+inputbox 'Please input an IP address or the host name.' 'Host information input' 
+HOSTADDR = inputstr 
+;; ①－２、入力確認(ホスト名 or IPアドレスの入力が無い場合終了) 
+strlen HOSTADDR 
+if result = 0 then 
+    messagebox 'Host information is not input.' 'Input error' 
+    end 
+endif
+
+
+msg = HOSTADDR
+strconcat msg ':22 /ssh /auth=password /user='
+strconcat msg username
+strconcat msg ' /passwd='
+strconcat msg passwdfile
+
+connect msg
+
+; 自動ログ記録
+logdir = 'C:\Users\nttatc\Desktop\login_macro\log\'
+
+logfile = logdir
+strconcat logfile username
+strconcat logfile '@'
+strconcat logfile HOSTADDR
+getdate datetime '-%Y%m%d-%H%M%S'
+strconcat logfile datetime
+strconcat logfile '.log'
+logopen logfile 0 1

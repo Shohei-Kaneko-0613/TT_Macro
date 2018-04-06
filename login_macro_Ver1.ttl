@@ -1,0 +1,41 @@
+;;■機能説明
+;;機能①
+;;　IPアドレスは決め打ち
+;;機能②
+;;　パスワードは暗号化
+;;機能③
+;;　自動でログ収集
+;=======================================
+username = 'root'
+hostname = '192.168.50.91'
+passwdfile = 'password.bat'
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+msg = 'Enter password for user '
+strconcat msg username
+passwordbox msg 'Get password'
+
+getpassword passwdfile username userpasswd
+
+msg = hostname
+strconcat msg ':22 /ssh /auth=password /user='
+strconcat msg username
+strconcat msg ' /passwd='
+strconcat msg userpasswd
+
+connect msg
+
+; 自動ログ記録
+logdir = 'C:\Users\nttatc\Desktop\login_macro\log\'
+
+logfile = logdir
+strconcat logfile username
+strconcat logfile '@'
+strconcat logfile hostname
+getdate datetime '-%Y%m%d-%H%M%S'
+strconcat logfile datetime
+strconcat logfile '.log'
+logopen logfile 0 1
+
+end

@@ -1,0 +1,59 @@
+;;■機能説明
+;;機能①
+;;　IPアドレスは選択式
+;;機能②
+;;　パスワードは平文で決め打ち
+;;機能③
+;;　自動でログ収集
+;;機能④
+;;　マクロログイン後、任意のコマンドを実行
+;========================================
+
+username = 'root'
+passwdfile = 'akiba2350'
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+strdim hostarray 2
+
+hostarray[0] = '192.168.50.90'
+hostarray[1] = '192.168.50.91'
+
+listbox '接続するホストを選択して下さい' '接続ホスト選択' hostarray
+if result >= 0 then
+    HOSTADDR = hostarray[result]
+else
+    end
+endif
+
+msg = HOSTADDR
+strconcat msg ':22 /ssh /auth=password /user='
+strconcat msg username
+strconcat msg ' /passwd='
+strconcat msg passwdfile
+
+connect msg
+
+;;ログイン後任意のコマンドを実行できる
+pause 2 ;;2秒停止
+wait '[root@nkrauth02 ~]#' ;;''内の文字が返ってくるのを待つ
+sendln 'ls -la' ;;''内のコマンドを実行
+pause 1
+wait '[root@nkrauth02 ~]#'
+sendln 'cd perl5'
+pause 1
+wait '[root@nkrauth02 perl5]#'
+sendln 'ls -la'
+
+; 自動ログ記録
+logdir = 'C:\Users\nttatc\Desktop\login_macro\log\'
+
+logfile = logdir
+strconcat logfile username
+strconcat logfile '@'
+strconcat logfile HOSTADDR
+getdate datetime '-%Y%m%d-%H%M%S'
+strconcat logfile datetime
+strconcat logfile '.log'
+logopen logfile 0 1
+
+end

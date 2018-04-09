@@ -8,7 +8,7 @@
 ;========================================
 
 username = 'root'
-passwdfile = 'akiba2350'
+passwdfile = '*****'
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ①－１、接続先ホスト情報入力 
@@ -31,7 +31,7 @@ strconcat msg passwdfile
 connect msg
 
 ; 自動ログ記録
-logdir = 'C:\Users\nttatc\Desktop\login_macro\log\'
+logdir = 'C:\*****\Desktop\login_macro\log\'
 
 logfile = logdir
 strconcat logfile username

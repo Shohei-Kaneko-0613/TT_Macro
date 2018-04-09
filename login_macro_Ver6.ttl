@@ -10,7 +10,7 @@
 ;========================================
 
 username = 'root'
-passwdfile = 'akiba2350'
+passwdfile = '*****'
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 strdim hostarray 2
@@ -34,7 +34,7 @@ strconcat msg passwdfile
 connect msg
 
 ;;コマンドを記載したリストを読み込み実行する
-fileopen cmdlist 'C:\Users\nttatc\Desktop\login_macro\cmdlist.txt' 0
+fileopen cmdlist 'C:\*****\Desktop\login_macro\cmdlist.txt' 0
 
 :loopstart
 filereadln cmdlist buf
@@ -55,7 +55,7 @@ endif
 fileclose cmdlist
 
 ; 自動ログ記録
-logdir = 'C:\Users\nttatc\Desktop\login_macro\log\'
+logdir = 'C:\*****\Desktop\login_macro\log\'
 
 logfile = logdir
 strconcat logfile username

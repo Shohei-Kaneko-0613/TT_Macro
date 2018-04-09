@@ -10,7 +10,7 @@
 ;========================================
 
 username = 'root'
-passwdfile = 'akiba2350'
+passwdfile = '*****'
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 strdim hostarray 2
@@ -35,17 +35,17 @@ connect msg
 
 ;;ログイン後任意のコマンドを実行できる
 pause 2 ;;2秒停止
-wait '[root@nkrauth02 ~]#' ;;''内の文字が返ってくるのを待つ
+wait '[root@***** ~]#' ;;''内の文字が返ってくるのを待つ
 sendln 'ls -la' ;;''内のコマンドを実行
 pause 1
-wait '[root@nkrauth02 ~]#'
+wait '[root@***** ~]#'
 sendln 'cd perl5'
 pause 1
-wait '[root@nkrauth02 perl5]#'
+wait '[root@***** perl5]#'
 sendln 'ls -la'
 
 ; 自動ログ記録
-logdir = 'C:\Users\nttatc\Desktop\login_macro\log\'
+logdir = 'C:\*****\Desktop\login_macro\log\'
 
 logfile = logdir
 strconcat logfile username

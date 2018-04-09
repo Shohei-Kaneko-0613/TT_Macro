@@ -27,7 +27,7 @@ strconcat msg userpasswd
 connect msg
 
 ; é©ìÆÉçÉOãLò^
-logdir = 'C:\Users\nttatc\Desktop\login_macro\log\'
+logdir = 'C:\****\Desktop\login_macro\log\'
 
 logfile = logdir
 strconcat logfile username

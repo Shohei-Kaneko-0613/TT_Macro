@@ -1,8 +1,8 @@
 username = 'root'
-passwdfile = 'akiba2350'
+passwdfile = '*****'
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-fileopen hostlist 'C:\Users\nttatc\Desktop\login_macro\hostlist.txt' 0
+fileopen hostlist 'C:\*****\Desktop\login_macro\hostlist.txt' 0
 
 :loopstart
 filereadln hostlist buf
@@ -32,16 +32,15 @@ endif
 fileclose hostlist
 
 ; é©ìÆÉçÉOãLò^
-logdir = 'C:\Users\nttatc\Desktop\login_macro\log\'
+logdir = 'C:\*****\Desktop\login_macro\log\'
 
 logfile = logdir
-logopen logfile 0 0
 strconcat logfile username
 strconcat logfile '@'
 strconcat logfile buf
 getdate datetime '-%Y%m%d-%H%M%S'
 strconcat logfile datetime
 strconcat logfile '.log'
-
+logopen logfile 0 0
 
 end

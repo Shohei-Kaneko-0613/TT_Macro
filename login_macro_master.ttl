@@ -1,0 +1,117 @@
+username = 'root'
+passwdfile = '*****'
+ipaddress1 = '*****'
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+strdim hostarray 3
+
+hostarray[0] = '*****'
+hostarray[1] = '*****'
+hostarray[2] = '*****'
+
+listbox '接続するホストを選択して下さい' '接続ホスト選択' hostarray
+if result = 0 then
+    HOSTADDR0 = hostarray[result]
+    msg = ipaddress1
+    strconcat msg ':22 /ssh /auth=password /user='
+    strconcat msg username
+    strconcat msg ' /passwd='
+    strconcat msg passwdfile
+
+    connect msg
+
+    ; 自動ログ記録
+    logdir = '*****'
+
+    logfile = logdir
+    strconcat logfile username
+    strconcat logfile '@'
+    strconcat logfile HOSTADDR0
+    getdate datetime '-%Y%m%d-%H%M%S'
+    strconcat logfile datetime
+    strconcat logfile '.log'
+    logopen logfile 0 1
+
+    end
+
+elseif result = 1 then
+    HOSTADDR1 = hostarray[result]
+    msg = ipaddress1
+    strconcat msg ':22 /ssh /auth=password /user='
+    strconcat msg username
+    strconcat msg ' /passwd='
+    strconcat msg passwdfile
+
+    connect msg
+    
+    pause 2 ;;2秒停止
+    wait '[root@***** ~]#'
+    sendln 'telnet *****'
+    pause 1
+    wait 'Password:'
+    sendln '*****'
+    pause 1
+    wait 'Switch>'
+    sendln 'en'
+    wait 'Password:'
+    sendln '*****'
+    wait 'Switch#'
+
+    ; 自動ログ記録
+    logdir = '*****'
+
+    logfile = logdir
+    strconcat logfile username
+    strconcat logfile '@'
+    strconcat logfile HOSTADDR1
+    getdate datetime '-%Y%m%d-%H%M%S'
+    strconcat logfile datetime
+    strconcat logfile '.log'
+    logopen logfile 0 1
+
+    end
+
+elseif result = 2 then
+    HOSTADDR2 = hostarray[result]
+    msg = ipaddress1
+    strconcat msg ':22 /ssh /auth=password /user='
+    strconcat msg username
+    strconcat msg ' /passwd='
+    strconcat msg passwdfile
+
+    connect msg
+
+    pause 2 ;;2秒停止
+    wait '[root@***** ~]#'
+    sendln 'telnet *****'
+    pause 1
+    wait 'Password:'
+    sendln '*****'
+    pause 1
+    wait 'Switch>'
+    sendln 'en'
+    wait 'Password:'
+    sendln '*****'
+    wait 'Switch#'
+    sendln 'telnet *****'
+    wait 'login:'
+    sendln 'adpro'
+    wait '>'
+    sendln 'en'
+    wait '#'
+
+    ; 自動ログ記録
+    logdir = '*****'
+
+    logfile = logdir
+    strconcat logfile username
+    strconcat logfile '@'
+    strconcat logfile HOSTADDR2
+    getdate datetime '-%Y%m%d-%H%M%S'
+    strconcat logfile datetime
+    strconcat logfile '.log'
+    logopen logfile 0 1
+
+    end
+
+   end
+endif
